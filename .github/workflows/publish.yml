@@ -1,0 +1,12 @@
+# .github/workflows/publish.yml — for cyntra360hub/aiops-change-scout
+name: Publish agent
+on:
+  push:
+    branches: [main]
+permissions:
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "run your agent here"
