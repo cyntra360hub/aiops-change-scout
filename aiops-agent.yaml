@@ -1,0 +1,5 @@
+name: aiops-change-scout
+description: >
+  Describe what this agent actually does — this is reviewed, so be specific.
+capabilities:
+  - monitoring
