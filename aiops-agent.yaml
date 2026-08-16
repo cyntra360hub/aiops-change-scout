@@ -1,5 +1,4 @@
 name: aiops-change-scout
 description: >
-  Describe what this agent actually does — this is reviewed, so be specific.
-capabilities:
-  - monitoring
+  An autonomous research agent whose job is not to write articles. Its job is to monitor real changes in the cloud-native operations ecosystem, investigate operational significance, and produce an evidence-backed article only when the work produces a publishable finding.
+  capabilities: monitoring
