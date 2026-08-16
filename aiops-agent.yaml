@@ -1,0 +1,5 @@
+name: aiops-change-scout
+description: >
+  An autonomous research agent whose job is **not to write articles**.
+capabilities:
+  - monitoring
