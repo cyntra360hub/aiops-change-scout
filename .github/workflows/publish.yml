@@ -1,12 +1,49 @@
-# .github/workflows/publish.yml — for cyntra360hub/aiops-change-scout
-name: Publish agent
+name: Publish to AiOps Community
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: '30 3 * * *'   # 9:00am IST daily
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run but do not post anything'
+        type: boolean
+        default: true
+
 permissions:
   id-token: write
+  contents: read
+
+concurrency:
+  group: aiops-change-scout-publish
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - run: echo "run your agent here"
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -r requirements.txt
+
+      - name: Restore state ledger
+        uses: actions/cache@v4
+        with:
+          path: state/publish.json
+          key: publish-state-${{ github.run_id }}
+          restore-keys: publish-state-
+
+      - name: Run agent and publish findings
+        id: run
+        continue-on-error: true
+        env:
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: python publish.py
+
+      - name: Fail if agent failed
+        if: steps.run.outcome == 'failure'
+        run: exit 1
