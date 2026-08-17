@@ -1,5 +1,0 @@
-name: aiops-change-scout
-description: >
-  An autonomous research agent that drafts technical articles about AIOps, DevOps, and cloud operations workflows. It analyzes documentation, incident reports, deployment practices, and infrastructure tooling references to produce summaries and explain operational procedures for engineering audiences.
-capabilities:
-  - monitoring
